@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <p id="headerstyle">TO-DO LIST</p>
+    <input type="text" placeholder="Input..." id="i" class='inp' autocomplete="on"></input>
+
+    <div class="crud">
+        <button class="create" onclick="createTasks()"> Save</button>
+        <button class="create" onclick="cleartasks()">Clear</button>
+    </div>
+
+    <ul id="tasks">
+        <!--<input type="text" class='taskinput'>
+            <button class="editbutton">edit</button>
+            <button class="deletebutton">delete</button>-->
+    </ul>
+
+    <script src="todojs.js"></script>
+</body>
+
+</html>
