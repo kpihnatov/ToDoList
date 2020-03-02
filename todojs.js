@@ -43,48 +43,66 @@ function deleteTasks() {
 
 var taskBox = document.getElementById('tasks');
 var lists = document.getElementsByTagName('li');
-
-
-
-
+var divcont = document.getElementById('uid');
+//var todoList = [];
 loadTasks();
 
-
 function createTasks() {
+    //create
+    createDiv();
+    createInp();
+    createEdit();
+    createDel();
+    document.getElementById('i').value = "";
+    saveTasks();
+    console.log(lists);
+}
+
+function createDiv() {
+    var cont = document.createElement('div');
+    cont.id = 'uid'
+    divcont = cont;
+    taskBox.appendChild(cont);
+}
+
+function createInp() {
     var input = document.getElementById('i').value
+
     var inputTask = document.createElement('li');
+    inputTask.contentEditable = 'true';
+
+    //inputTask.id = counter;
     inputTask.classList.add('taskinput');
     inputTask.type = 'text';
     inputTask.innerHTML = input;
-    console.log(input)
-    console.log(inputTask)
-        //Create Buttons EDIT/DELETE
+    divcont.appendChild(inputTask);
+
+}
+
+function createEdit() {
     var editButton = document.createElement('button');
     editButton.innerHTML = "edit"
     editButton.classList.add('editbutton');
+    editButton.onclick = editItem;
+    divcont.appendChild(editButton);
+    // divcont.appendChild(editButton);
+
+}
+
+function createDel() {
     var deleteButton = document.createElement('button');
     deleteButton.innerHTML = "delete"
     deleteButton.classList.add('deletebutton');
-
-    //append child
-    taskBox.appendChild(inputTask);
-    taskBox.appendChild(editButton);
-    taskBox.appendChild(deleteButton);
-    deleteButton.addEventListener('click', () => deleteTask(taskBox));
-    editButton.addEventListener('click', () => editTask());
-    document.getElementById('i').value = "";
-
+    deleteButton.onclick = deleteItem;
+    divcont.appendChild(deleteButton);
+    //divcont.appendChild(deleteButton);
+}
+let deleteItem = (e) => {
+    e.target.parentNode.remove();
     saveTasks();
-    console.log(lists);
-
-    function deleteTask() {
-
-        taskBox.removeChild(inputTask);
-        taskBox.removeChild(editButton);
-        taskBox.removeChild(deleteButton);
-        saveTasks();
-    }
-
+}
+let editItem = (e) => {
+    saveTasks();
 }
 
 
@@ -96,17 +114,17 @@ function createTasks() {
 
 //*********WEB_STORAGE********
 function saveTasks() {
-    localStorage.setItem('1', taskBox.innerHTML);
+    localStorage.setItem('1', JSON.stringify(taskBox.innerHTML));
 }
 
 function loadTasks() {
     if (localStorage.getItem('1')) {
-        taskBox.innerHTML = localStorage.getItem('1');
+        taskBox.innerHTML = JSON.parse(localStorage.getItem('1'));
 
     }
     console.log(taskBox)
 }
 //Temporary
 function cleartasks() {
-    localStorage.clear()
+    localStorage.clear();
 }
